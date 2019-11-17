@@ -55,8 +55,8 @@ public class User extends Person{
         double[] normaldistances = new double[lop.size()];
 
         for(int i=0; i<lop.size(); i++) {
-            double maxDist = (p.getWeight()[0] + p.getWeight()[1] + p.getWeight()[2] + p.getWeight()[3] * Math.pow(21*36, 0.5) + p.getWeight()[4])
-                    + lop.get(i).getWeight()[0] + lop.get(i).getWeight()[1] + lop.get(i).getWeight()[2] + lop.get(i).getWeight()[3] * Math.pow(21*36, 0.5) + lop.get(i).getWeight()[4];
+            double maxDist = (p.getWeight()[0] + p.getWeight()[1] + p.getWeight()[2] + p.getWeight()[3] * Math.pow(21*36, 0.5)/21 + p.getWeight()[4])
+                    + lop.get(i).getWeight()[0] + lop.get(i).getWeight()[1] + lop.get(i).getWeight()[2] + lop.get(i).getWeight()[3] * Math.pow(21*36, 0.5)/21 + lop.get(i).getWeight()[4];
             normaldistances[i]= (1- (computeDistance(p, lop.get(i)) + computeDistance(lop.get(i), p)))/maxDist;
         }
 
@@ -164,7 +164,7 @@ public class User extends Person{
         {
             counter+= Math.pow(a[i]-b[i],2);
         }
-        return Math.pow(counter, 0.5) * weight;
+        return Math.pow(counter, 0.5) * weight/21;
     }
 
     public double futureDist(int a, int b, double weight)

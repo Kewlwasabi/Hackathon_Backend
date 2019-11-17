@@ -15,7 +15,7 @@ public class Driver {
         p.setName("Saahil Kumar");
         p.setNuid(0);
         p.setSchedule(new int[]{3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3});
-        p.setSpec(new int[]{1, 2, 1, 2});
+        p.setSpec(new int[]{1, 2, 2, 1});
         p.setWeight(new double[]{0.01, 0.1, 0.4, 0.3, 0.19});
         User user = new User("https://tri-op.firebaseio.com/Person.json", p);
         ArrayList<Integer> indexes = user.getTopfive();
