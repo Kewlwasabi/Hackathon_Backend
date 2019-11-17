@@ -17,21 +17,13 @@ public class User extends Person{
     }
 
     public ArrayList<Person> removeBad(ArrayList<Person> lop, Person p) {
-        int gender = p.getSpec()[3];
-        int preference = p.getSpec()[2];
+        int gender = p.getSpec()[2];
+        int preference = p.getSpec()[3];
         ArrayList<Person> badpersons = new ArrayList<Person>();
 
         for(Person pe : lop) {
-            if(preference == 0) {
-                if(!(pe.getSpec()[3]==0))
-                    badpersons.add(pe);
-                if(!(pe.getSpec()[3] == gender))
-                    badpersons.add(pe);
-            }
-            else {
-                if(!(pe.getSpec()[3] == preference) || !(gender == pe.getSpec()[2]))
-                    badpersons.add(pe);
-            }
+            if(!((gender == pe.getSpec()[3]) && (preference == pe.getSpec()[2])))
+                badpersons.add(pe);
         }
 
         for(Person x : badpersons) {
