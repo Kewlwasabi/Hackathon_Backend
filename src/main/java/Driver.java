@@ -15,7 +15,7 @@ public class Driver {
         p.setName("Dumbass Ning");
         p.setNuid(0);
         p.setSchedule(new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 3});
-        p.setSpec(new int[]{22, 1, 2});
+        p.setSpec(new int[]{22, 1, 2, 1});
         p.setWeight(new double[]{0.3, 0, 0, 0, 0.7});
         User user = new User("https://tri-op.firebaseio.com/Person.json", p);
         System.out.println(user.getTopfive());
