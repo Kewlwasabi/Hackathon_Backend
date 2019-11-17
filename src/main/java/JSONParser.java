@@ -13,7 +13,6 @@ public class JSONParser {
         this.json = json;
         objectMapper = new ObjectMapper();
         jsonNode = objectMapper.readTree(json);
-        System.out.println(jsonNode.toString());
     }
 
     public Person createPerson(String data) {

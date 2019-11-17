@@ -6,16 +6,18 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class Driver {
-    public static void main(String[] args) throws JsonProcessingException {
-        NetClientGet client = new NetClientGet();
-        String data = client.getData("https://tri-op.firebaseio.com/Person.json");
-        JSONParser parser = new JSONParser(data);
-        ArrayList<Person> persons = new ArrayList<Person>();
-
-        for (Iterator<Map.Entry<String, JsonNode>> it = parser.jsonNode.fields(); it.hasNext(); ) {
-            Map.Entry<String, JsonNode> p = it.next();
-            persons.add(parser.createPerson(p.getValue().toString()));
-
-        }
+    public static void main(String[] args) {
+        Person p = new Person();
+        p.setAge(18);
+        p.setCoop(0);
+        p.setFuture(0);
+        p.setLocation(1);
+        p.setName("Dumbass Ning");
+        p.setNuid(0);
+        p.setSchedule(new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 3});
+        p.setSpec(new int[]{22, 1, 2});
+        p.setWeight(new double[]{0.3, 0, 0, 0, 0.7});
+        User user = new User("https://tri-op.firebaseio.com/Person.json", p);
+        System.out.println(user.getTopfive());
     }
 }
