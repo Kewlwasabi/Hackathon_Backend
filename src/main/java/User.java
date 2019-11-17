@@ -11,9 +11,29 @@ public class User extends Person{
 
     public User(String url, Person p) {
 
-        persons = getPersons(url);
+        persons = removeBad(getPersons(url), p);
         topfive = bestMatches(normalizeData(persons, p));
 
+    }
+
+    public ArrayList<Person> removeBad(ArrayList<Person> lop, Person p) {
+        int gender = p.getSpec()[3];
+        int preference = p.getSpec()[2];
+
+        for(Person pe : lop) {
+            if(preference == 0) {
+                if(!(pe.getSpec()[3]==0))
+                    lop.remove(pe);
+                if(!(pe.getSpec()[3] == gender))
+                    lop.remove(pe);
+            }
+            else {
+                if(!(pe.getSpec()[3] == preference) || !(gender == pe.getSpec()[2]))
+                    lop.remove(pe);
+            }
+        }
+
+        return lop;
     }
 
     public ArrayList<Person> getPersons(String url) {

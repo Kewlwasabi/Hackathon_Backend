@@ -16,6 +16,8 @@ public class Person {
     // 2: PHD
     private double[] weight;
     private int[] spec;
+    // 0: Range
+    // 1: Specification
 
     public int getAge() {
         return age;
