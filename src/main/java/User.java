@@ -8,17 +8,21 @@ public class User extends Person{
 
     private ArrayList<Person> persons = new ArrayList<>();
     private ArrayList<Integer> topfive = new ArrayList<>();
+    String url;
 
-    public User(String url, Person p) {
-
-        persons = removeBad(getPersons(url), p);
-        topfive = bestMatches(normalizeData(persons, p));
-
+    public User(String url) {
+        super();
+        this.url = url;
     }
 
-    public ArrayList<Person> removeBad(ArrayList<Person> lop, Person p) {
-        int gender = p.getSpec()[2];
-        int preference = p.getSpec()[3];
+    public void initData() {
+        persons = removeBad(getPersons(url));
+        topfive = bestMatches(normalizeData(persons));
+    }
+
+    public ArrayList<Person> removeBad(ArrayList<Person> lop) {
+        int gender = getSpec()[2];
+        int preference = getSpec()[3];
         ArrayList<Person> badpersons = new ArrayList<Person>();
 
         for(Person pe : lop) {
@@ -51,13 +55,13 @@ public class User extends Person{
         }
     }
 
-    public double[] normalizeData(ArrayList<Person> lop, Person p) {
+    public double[] normalizeData(ArrayList<Person> lop) {
         double[] normaldistances = new double[lop.size()];
 
         for(int i=0; i<lop.size(); i++) {
-            double maxDist = (p.getWeight()[0] + p.getWeight()[1] + p.getWeight()[2] + p.getWeight()[3] * Math.pow(21*36, 0.5)/21 + p.getWeight()[4])
+            double maxDist = (getWeight()[0] + getWeight()[1] + getWeight()[2] + getWeight()[3] * Math.pow(21*36, 0.5)/21 + getWeight()[4])
                     + lop.get(i).getWeight()[0] + lop.get(i).getWeight()[1] + lop.get(i).getWeight()[2] + lop.get(i).getWeight()[3] * Math.pow(21*36, 0.5)/21 + lop.get(i).getWeight()[4];
-            normaldistances[i]= (1- (computeDistance(p, lop.get(i)) + computeDistance(lop.get(i), p)))/maxDist;
+            normaldistances[i]= (1- (computeDistance(this, lop.get(i)) + computeDistance(lop.get(i), this)))/maxDist;
         }
 
         return normaldistances;
@@ -85,27 +89,6 @@ public class User extends Person{
     }
 
 
-    public double[] getWeight()
-    {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Age Weight:");
-        double ageWeight = scanner.nextInt();
-        System.out.print("Do you prefer someone who's younger (0), older(1), or no preference(2)?");
-        int specification =scanner.nextInt();
-        System.out.print("What's ur age range preferenec?");
-        int ageRange =scanner.nextInt();
-        System.out.print("Coop Cycle Weight:");
-        double coopWeight =scanner.nextInt();
-        System.out.print("Location Weight");
-        double locationWeight =scanner.nextInt();
-        System.out.print("Schedule Weight");
-        double scheduleWeight =scanner.nextInt();
-        System.out.print("Future Plans Weight");
-        double futureWeight =scanner.nextInt();
-
-        return new double[] {ageWeight,coopWeight,locationWeight,scheduleWeight,futureWeight};
-    }
 
     public double computeDistance(Person a, Person b)
     {
@@ -117,7 +100,6 @@ public class User extends Person{
 
         return dist;
     }
-
 
     public double ageDist(int a, int b, int range, int specification, double weight)
     {//specification is either 0, 1, or 2, which represents must be at least younger, at least older, or do not care
